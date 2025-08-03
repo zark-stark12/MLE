@@ -1,0 +1,3 @@
+2025-08-01 22:49:03.791 | INFO     | model_service:load_model:16 - Checking model exisgs
+2025-08-01 22:49:03.791 | INFO     | model_service:load_model:22 - Loading pickled model at models/rf_v1
+2025-08-01 22:49:03.841 | INFO     | model_service:predict:26 - Predicting model with given inputs: [85, 2015, 2, 20, 1, 1, 0, 0, 1]
