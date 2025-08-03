@@ -1,5 +1,5 @@
 import pandas as pd
-from collection import load_data
+from collection import load_data_from_db
 import re
 
 from loguru import logger
@@ -7,7 +7,7 @@ from loguru import logger
 
 def prepare_data():
     logger.info("setting up preprocesing pipeline")
-    data = load_data()
+    data = load_data_from_db()
     data_encoded = encode_cat_cols(data)
     data_encoded = parse_garden_col(data_encoded)
     return data_encoded

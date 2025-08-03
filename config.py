@@ -13,10 +13,12 @@ class Settings(BaseSettings):
     data_file_name: str
     model_path: str
     model_name: str
+    log_level: str
+
 
 settings = Settings()
 
 logger.remove() # prevents log displaying in the console
-logger.add('app.log', level="DEBUG", rotation="1 day", retention="2 days", compression="zip")
+logger.add('app.log', level=settings.log_level, rotation="1 day", retention="2 days", compression="zip")
 
 engine = create_engine('sqlite:///db.sqlite')

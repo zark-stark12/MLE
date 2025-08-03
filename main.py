@@ -9,6 +9,7 @@ def main():
 
     input_params = [85, 2015, 2, 20, 1, 1, 0, 0, 1]
     pred = ml_svc.predict(input_params)
+    logger.info(f"Predicted values from model object: {pred}")
     print(pred)
 
 if __name__ == '__main__':

@@ -1,3 +1,292 @@
-2025-08-01 22:49:03.791 | INFO     | model_service:load_model:16 - Checking model exisgs
-2025-08-01 22:49:03.791 | INFO     | model_service:load_model:22 - Loading pickled model at models/rf_v1
-2025-08-01 22:49:03.841 | INFO     | model_service:predict:26 - Predicting model with given inputs: [85, 2015, 2, 20, 1, 1, 0, 0, 1]
+2025-08-03 16:33:45.425 | INFO     | model_service:load_model:16 - Checking model exisgs
+2025-08-03 16:33:45.427 | INFO     | model_service:load_model:20 - Did not find existing model. Building new model
+2025-08-03 16:33:45.427 | INFO     | model:build_model:12 - beginning model preprocessing of data
+2025-08-03 16:33:45.428 | INFO     | preparation:prepare_data:9 - setting up preprocesing pipeline
+2025-08-03 16:33:45.428 | INFO     | collection:load_data_from_db:15 - loading data table from database
+2025-08-03 16:33:45.433 | ERROR    | model:build_model:13 - An error has been caught in function 'build_model', process 'MainProcess' (854), thread 'MainThread' (8404344960):
+Traceback (most recent call last):
+
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1961, in _exec_single_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x15f59cf40>
+    │    └ <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x15f31b230>
+    └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 944, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ ()
+    │      │       └ 'SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartme...
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x102cdfbc0>
+
+sqlite3.OperationalError: no such column: rent_apartments.construction_year
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 15, in <module>
+    main()
+    └ <function main at 0x102cc32e0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 8, in main
+    ml_svc.load_model()
+    │      └ <function ModelService.load_model at 0x168480d60>
+    └ <model_service.ModelService object at 0x158fb34d0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model_service.py", line 21, in load_model
+    build_model(settings.model_name)
+    │           │        └ 'rf_db_v1'
+    │           └ Settings(data_file_name='rent_apartments.csv', model_path='models', model_name='rf_db_v1', log_level='DEBUG')
+    └ <function build_model at 0x102e53e20>
+
+> File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 13, in build_model
+    df = prepare_data()
+         └ <function prepare_data at 0x159071260>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/preparation.py", line 10, in prepare_data
+    data = load_data_from_db()
+           └ <function load_data_from_db at 0x1684805e0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/collection.py", line 17, in load_data_from_db
+    return pd.read_sql(query, engine)
+           │  │        │      └ Engine(sqlite:///db.sqlite)
+           │  │        └ <sqlalchemy.sql.selectable.Select object at 0x168472270>
+           │  └ <function read_sql at 0x15811b1a0>
+           └ <module 'pandas' from '/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-package...
+
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 736, in read_sql
+    return pandas_sql.read_query(
+           │          └ <function SQLDatabase.read_query at 0x15813cc20>
+           └ <pandas.io.sql.SQLDatabase object at 0x168472510>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 1848, in read_query
+    result = self.execute(sql, params)
+             │    │       │    └ None
+             │    │       └ <sqlalchemy.sql.selectable.Select object at 0x168472270>
+             │    └ <function SQLDatabase.execute at 0x15813ca40>
+             └ <pandas.io.sql.SQLDatabase object at 0x168472510>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 1672, in execute
+    return self.con.execute(sql, *args)
+           │    │   │       │     └ []
+           │    │   │       └ <sqlalchemy.sql.selectable.Select object at 0x168472270>
+           │    │   └ <function Connection.execute at 0x15f3fdb20>
+           │    └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+           └ <pandas.io.sql.SQLDatabase object at 0x168472510>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           └ <bound method ClauseElement._execute_on_connection of <sqlalchemy.sql.selectable.Select object at 0x168472270>>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           │          └ <function Connection._execute_clauseelement at 0x15f3fde40>
+           └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+          │    └ <function Connection._execute_context at 0x15f3fe020>
+          └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1840, in _execute_context
+    return self._exec_single_context(
+           │    └ <function Connection._exec_single_context at 0x15f3fe0c0>
+           └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1980, in _exec_single_context
+    self._handle_dbapi_exception(
+    │    └ <function Connection._handle_dbapi_exception at 0x15f3fe340>
+    └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2349, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+          │                    │              │                 └ OperationalError('no such column: rent_apartments.construction_year')
+          │                    │              └ (<class 'sqlite3.OperationalError'>, OperationalError('no such column: rent_apartments.construction_year'), <traceback object...
+          │                    └ <method 'with_traceback' of 'BaseException' objects>
+          └ OperationalError('(sqlite3.OperationalError) no such column: rent_apartments.construction_year')
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1961, in _exec_single_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x15f59cf40>
+    │    └ <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x15f31b230>
+    └ <sqlalchemy.engine.base.Connection object at 0x1684727b0>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 944, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ ()
+    │      │       └ 'SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartme...
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x102cdfbc0>
+
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: rent_apartments.construction_year
+[SQL: SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartments.bedrooms, rent_apartments.bathrooms, rent_apartments.balcony, rent_apartments.storage, rent_apartments.parking, rent_apartments.furnished, rent_apartments.garage, rent_apartments.garden, rent_apartments.energy, rent_apartments.facilities, rent_apartments.zip, rent_apartments.neighborhood, rent_apartments.rent 
+FROM rent_apartments]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-03 16:33:45.439 | INFO     | model:get_model_data:23 - load model related data
+2025-08-03 16:33:45.439 | ERROR    | __main__:<module>:15 - An error has been caught in function '<module>', process 'MainProcess' (854), thread 'MainThread' (8404344960):
+Traceback (most recent call last):
+
+> File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 15, in <module>
+    main()
+    └ <function main at 0x102cc32e0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 8, in main
+    ml_svc.load_model()
+    │      └ <function ModelService.load_model at 0x168480d60>
+    └ <model_service.ModelService object at 0x158fb34d0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model_service.py", line 21, in load_model
+    build_model(settings.model_name)
+    │           │        └ 'rf_db_v1'
+    │           └ Settings(data_file_name='rent_apartments.csv', model_path='models', model_name='rf_db_v1', log_level='DEBUG')
+    └ <function build_model at 0x102e53e20>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 14, in build_model
+    X,y = get_model_data(df)
+          │              └ None
+          └ <function get_model_data at 0x159070fe0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 35, in get_model_data
+    X = data[IVs].copy()
+        │    └ ['area', 'constraction_year', 'bedrooms', 'garden', 'balcony_yes', 'parking_yes', 'furnished_yes', 'garage_yes', 'storage_yes']
+        └ None
+
+TypeError: 'NoneType' object is not subscriptable
+2025-08-03 16:38:26.680 | INFO     | model_service:load_model:16 - Checking model exists
+2025-08-03 16:38:26.680 | WARNING  | model_service:load_model:20 - Did not find existing model. Building new model
+2025-08-03 16:38:26.680 | INFO     | model:build_model:12 - beginning model preprocessing of data
+2025-08-03 16:38:26.680 | INFO     | preparation:prepare_data:9 - setting up preprocesing pipeline
+2025-08-03 16:38:26.680 | INFO     | collection:load_data_from_db:15 - loading data table from database
+2025-08-03 16:38:26.685 | ERROR    | model:build_model:13 - An error has been caught in function 'build_model', process 'MainProcess' (1069), thread 'MainThread' (8404344960):
+Traceback (most recent call last):
+
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1961, in _exec_single_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x14f7a0ea0>
+    │    └ <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x14f61b230>
+    └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 944, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ ()
+    │      │       └ 'SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartme...
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x14e4ed640>
+
+sqlite3.OperationalError: no such column: rent_apartments.construction_year
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 16, in <module>
+    main()
+    └ <function main at 0x102fc9440>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 8, in main
+    ml_svc.load_model()
+    │      └ <function ModelService.load_model at 0x14fd64a40>
+    └ <model_service.ModelService object at 0x14e43b4d0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model_service.py", line 21, in load_model
+    build_model(settings.model_name)
+    │           │        └ 'rf_db_v1'
+    │           └ Settings(data_file_name='rent_apartments.csv', model_path='models', model_name='rf_db_v1', log_level='DEBUG')
+    └ <function build_model at 0x103104540>
+
+> File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 13, in build_model
+    df = prepare_data()
+         └ <function prepare_data at 0x14e4fd1c0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/preparation.py", line 10, in prepare_data
+    data = load_data_from_db()
+           └ <function load_data_from_db at 0x14fd642c0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/collection.py", line 17, in load_data_from_db
+    return pd.read_sql(query, engine)
+           │  │        │      └ Engine(sqlite:///db.sqlite)
+           │  │        └ <sqlalchemy.sql.selectable.Select object at 0x14fd44ad0>
+           │  └ <function read_sql at 0x14cdff1a0>
+           └ <module 'pandas' from '/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-package...
+
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 736, in read_sql
+    return pandas_sql.read_query(
+           │          └ <function SQLDatabase.read_query at 0x14ce20c20>
+           └ <pandas.io.sql.SQLDatabase object at 0x14fd44d70>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 1848, in read_query
+    result = self.execute(sql, params)
+             │    │       │    └ None
+             │    │       └ <sqlalchemy.sql.selectable.Select object at 0x14fd44ad0>
+             │    └ <function SQLDatabase.execute at 0x14ce20a40>
+             └ <pandas.io.sql.SQLDatabase object at 0x14fd44d70>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/pandas/io/sql.py", line 1672, in execute
+    return self.con.execute(sql, *args)
+           │    │   │       │     └ []
+           │    │   │       └ <sqlalchemy.sql.selectable.Select object at 0x14fd44ad0>
+           │    │   └ <function Connection.execute at 0x14f6fda80>
+           │    └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+           └ <pandas.io.sql.SQLDatabase object at 0x14fd44d70>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           └ <bound method ClauseElement._execute_on_connection of <sqlalchemy.sql.selectable.Select object at 0x14fd44ad0>>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           │          └ <function Connection._execute_clauseelement at 0x14f6fdda0>
+           └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1635, in _execute_clauseelement
+    ret = self._execute_context(
+          │    └ <function Connection._execute_context at 0x14f6fdf80>
+          └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1840, in _execute_context
+    return self._exec_single_context(
+           │    └ <function Connection._exec_single_context at 0x14f6fe020>
+           └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1980, in _exec_single_context
+    self._handle_dbapi_exception(
+    │    └ <function Connection._handle_dbapi_exception at 0x14f6fe2a0>
+    └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2349, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+          │                    │              │                 └ OperationalError('no such column: rent_apartments.construction_year')
+          │                    │              └ (<class 'sqlite3.OperationalError'>, OperationalError('no such column: rent_apartments.construction_year'), <traceback object...
+          │                    └ <method 'with_traceback' of 'BaseException' objects>
+          └ OperationalError('(sqlite3.OperationalError) no such column: rent_apartments.construction_year')
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1961, in _exec_single_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x14f7a0ea0>
+    │    └ <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x14f61b230>
+    └ <sqlalchemy.engine.base.Connection object at 0x14fd45010>
+  File "/Users/felipezarco/Library/Caches/pypoetry/virtualenvs/mle-JIVz_E_M-py3.13/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 944, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ ()
+    │      │       └ 'SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartme...
+    │      └ <method 'execute' of 'sqlite3.Cursor' objects>
+    └ <sqlite3.Cursor object at 0x14e4ed640>
+
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: rent_apartments.construction_year
+[SQL: SELECT rent_apartments.address, rent_apartments.area, rent_apartments.construction_year, rent_apartments.rooms, rent_apartments.bedrooms, rent_apartments.bathrooms, rent_apartments.balcony, rent_apartments.storage, rent_apartments.parking, rent_apartments.furnished, rent_apartments.garage, rent_apartments.garden, rent_apartments.energy, rent_apartments.facilities, rent_apartments.zip, rent_apartments.neighborhood, rent_apartments.rent 
+FROM rent_apartments]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-03 16:38:26.691 | INFO     | model:get_model_data:23 - load model related data
+2025-08-03 16:38:26.691 | ERROR    | __main__:<module>:16 - An error has been caught in function '<module>', process 'MainProcess' (1069), thread 'MainThread' (8404344960):
+Traceback (most recent call last):
+
+> File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 16, in <module>
+    main()
+    └ <function main at 0x102fc9440>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/main.py", line 8, in main
+    ml_svc.load_model()
+    │      └ <function ModelService.load_model at 0x14fd64a40>
+    └ <model_service.ModelService object at 0x14e43b4d0>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model_service.py", line 21, in load_model
+    build_model(settings.model_name)
+    │           │        └ 'rf_db_v1'
+    │           └ Settings(data_file_name='rent_apartments.csv', model_path='models', model_name='rf_db_v1', log_level='DEBUG')
+    └ <function build_model at 0x103104540>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 14, in build_model
+    X,y = get_model_data(df)
+          │              └ None
+          └ <function get_model_data at 0x14e4e3c40>
+
+  File "/Users/felipezarco/Documents/GitHub/MLE/model.py", line 35, in get_model_data
+    X = data[IVs].copy()
+        │    └ ['area', 'constraction_year', 'bedrooms', 'garden', 'balcony_yes', 'parking_yes', 'furnished_yes', 'garage_yes', 'storage_yes']
+        └ None
+
+TypeError: 'NoneType' object is not subscriptable

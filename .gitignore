@@ -1,0 +1,13 @@
+__pycache__/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Log files
+*.log
+
+# Data files (example - adjust as needed)
+*.csv
+*.xlsx
+
+.DS_Store
