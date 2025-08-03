@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     model_path: str
     model_name: str
     log_level: str
+    db_conn_str: str
+    table_name: str
 
 
 settings = Settings()
@@ -21,4 +23,4 @@ settings = Settings()
 logger.remove() # prevents log displaying in the console
 logger.add('app.log', level=settings.log_level, rotation="1 day", retention="2 days", compression="zip")
 
-engine = create_engine('sqlite:///db.sqlite')
+engine = create_engine(settings.db_conn_str)

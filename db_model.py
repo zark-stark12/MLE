@@ -1,12 +1,12 @@
 from sqlalchemy import REAL, INTEGER, VARCHAR, NVARCHAR
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
+from config import settings
 
 class Base(DeclarativeBase):
     pass
 
 class RentApartments(Base):
-    __tablename__ = 'rent_apartments'
+    __tablename__ = settings.table_name
 
     address: Mapped[str] = mapped_column(VARCHAR(), primary_key=True)
     area: Mapped[float] = mapped_column(REAL())
