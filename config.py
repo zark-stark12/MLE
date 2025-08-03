@@ -10,7 +10,6 @@ from sqlalchemy import create_engine
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
-    data_file_name: str
     model_path: str
     model_name: str
     log_level: str

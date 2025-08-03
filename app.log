@@ -1,0 +1,4 @@
+2025-08-03 17:36:10.477 | INFO     | model_service:load_model:16 - Checking model exists
+2025-08-03 17:36:10.477 | INFO     | model_service:load_model:22 - Loading pickled model at models/rf_db_v1
+2025-08-03 17:36:10.494 | INFO     | model_service:predict:26 - Predicting model with given inputs: [85, 2015, 2, 20, 1, 1, 0, 0, 1]
+2025-08-03 17:36:10.509 | INFO     | __main__:main:12 - Predicted values from model object: [2026.72227458]
