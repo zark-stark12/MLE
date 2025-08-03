@@ -18,7 +18,7 @@ class ModelService:
 
         if not model_path.exists():
             logger.warning("Did not find existing model. Building new model")
-            build_model(settings.model_name)
+            build_model()
         logger.info(f"Loading pickled model at {settings.model_path}/{settings.model_name}")
         self.model = pickle.load(open(f'{settings.model_path}/{settings.model_name}', 'rb'))
 

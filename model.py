@@ -8,7 +8,7 @@ from config import settings
 from loguru import logger
 pd.options.mode.chained_assignment = None 
 
-def build_model(model_name):
+def build_model():
     logger.info("beginning model preprocessing of data")
     df = prepare_data()
     X,y = get_model_data(df)
@@ -16,13 +16,13 @@ def build_model(model_name):
     model = train_model(X_train, y_train)
     score = evaluate_model(model, X_test, y_test)
     print(score)
-    save_model(model, name=model_name)
+    save_model(model)
     
 
 def get_model_data(data):
     logger.info("load model related data")
     IVs = ['area', 
-       'constraction_year', 
+       'construction_year', 
        'bedrooms', 
        'garden', 
        'balcony_yes', 
@@ -54,4 +54,4 @@ def evaluate_model(model, X_test, y_test):
 
 def save_model(model):
     logger.info(f"saving model to path: {settings.model_path}")
-    pickle.dump(model, open(f'{settings.model_pth}/{settings.model_name}', 'wb'))
+    pickle.dump(model, open(f'{settings.model_path}/{settings.model_name}', 'wb'))

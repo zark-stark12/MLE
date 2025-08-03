@@ -1,4 +1,4 @@
-address,area,constraction_year,rooms,bedrooms,bathrooms,balcony,storage,parking,furnished,garage,garden,energy,facilities,zip,neighborhood,rent
+address,area,construction_year,rooms,bedrooms,bathrooms,balcony,storage,parking,furnished,garage,garden,energy,facilities,zip,neighborhood,rent
 1071 HN Amsterdam (Cornelis Schuytbuurt),167.0,1870,3,2,2,yes,no,no,yes,no,Not present,D,Roof terrace,1071 HN,Cornelis Schuytbuurt,4500
 1071 HK Amsterdam (Concertgebouwbuurt),150.0,1890,3,2,2,yes,no,yes,yes,no,Not present,A,"Cable TV, Internet connection, Fireplace, Bath, Toilet",1071 HK,Concertgebouwbuurt,3450
 1071 HK Amsterdam (Concertgebouwbuurt),150.0,1890,3,2,2,yes,no,yes,yes,no,Not present,A,"Cable TV, Internet connection, Fireplace, Bath, Toilet",1071 HK,Concertgebouwbuurt,3450
