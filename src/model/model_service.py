@@ -1,3 +1,11 @@
+"""
+This module provides functionality for managing our ML regression model
+
+It contains the ModelService class which handles loading, using, and if needing
+training our ML model if no such model exists. It loads the model from a file or builds
+the model which is used to make predictions
+"""
+
 import pickle
 from pathlib import Path
 
@@ -6,12 +14,10 @@ from loguru import logger
 from model.pipeline.model import build_model
 from config.config import settings
 
-
-def load_model(path=''):
-    pass
-
 class ModelService:
-
+    """
+    A service class for manaing 
+    """
     def __init__(self):
         self.model = None
 
