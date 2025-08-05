@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 
-from config.config import settings
+from config import model_settings
 from model.pipeline.preparation import prepare_data
 
 pd.options.mode.chained_assignment = None 
@@ -56,5 +56,8 @@ def evaluate_model(model, X_test, y_test):
     return model.score(X_test, y_test)
 
 def save_model(model):
-    logger.info(f"saving model to path: {settings.model_path}")
-    pickle.dump(model, open(f'{settings.model_path}/{settings.model_name}', 'wb'))
+    model_path = f'{model_settings.model_path}/{model_settings.model_name}'
+    logger.info(f"saving model to path: {model_path}")
+
+    with open(f'{model_path}', 'wb') as f:
+        pickle.dump(model, f)
