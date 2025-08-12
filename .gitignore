@@ -9,5 +9,7 @@ __pycache__/
 # Data files (example - adjust as needed)
 *.csv
 *.xlsx
+*.zip
+*.gz
 
 .DS_Store
