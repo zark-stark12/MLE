@@ -1,0 +1,34 @@
+# First Github action workflow
+
+name: Build Application
+
+runs: 
+  using: composite
+
+  steps:
+  - name: Checkout repository
+    # run: git clone https://github.com/zark-stark12/MLE.git . # Run bash command
+    uses: actions/checkout@v5 # this does the same as the git clone bash command above https://github.com/actions/checkout
+
+  - name: Setup python
+    uses: actions/setup-python@v5 # uses github action workflow
+    with:
+      python-version: '3.13.5'
+
+  - name: Install Poetry
+    uses: snok/install-poetry@v1
+    with:
+      virtualenvs-in-project: true # Tells poetry to install its virtual env in the main directory
+
+  - name: Load cached venv
+    uses: actions/cache@v4
+    id: cached-poetry-dependencies # can be anything
+    with:
+      path: .venv
+      key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+  - name: Install dependencies using poetry
+    if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true' # if we can't retrieve cached data from our object i.e. venv
+    run: poetry run make install
+    shell: bash
+

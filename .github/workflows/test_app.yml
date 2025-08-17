@@ -1,0 +1,30 @@
+# First Github action workflow
+
+name: Test App Workflow
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read # Allow to read content on remote repository
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      # run: git clone https://github.com/zark-stark12/MLE.git . # Run bash command
+      uses: actions/checkout@v5 # this does the same as the git clone bash command above https://github.com/actions/checkout
+
+    - name: Build application
+      uses: ./.github/actions/build-application # Integrate our builds for the applications easily here in separate clean workflows
+
+    - name: Lint checker with flake8
+     # run: poetry run make check
+     run: poetry run make run
+
