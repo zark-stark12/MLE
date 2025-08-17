@@ -13,3 +13,5 @@ __pycache__/
 *.gz
 
 .DS_Store
+
+.sqlite
