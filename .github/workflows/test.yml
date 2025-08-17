@@ -12,8 +12,7 @@ permissions:
   contents: read # Allow to read content on remote repository
 
 jobs:
-
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
