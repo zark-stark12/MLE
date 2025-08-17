@@ -24,6 +24,5 @@ jobs:
       uses: ./.github/actions/build-application # Integrate our builds for the applications easily here in separate clean workflows
 
     - name: Test application with make run
-     # run: poetry run make check
-     run: poetry run make run
+      run: poetry run make run
 
